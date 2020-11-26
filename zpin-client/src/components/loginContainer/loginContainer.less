@@ -1,0 +1,33 @@
+.login-container {
+  position: relative;
+  height: 40vh;
+  width: 100vw;
+  overflow: hidden;
+  .content {
+    font-family:  "Arial","Microsoft YaHei","黑体","宋体",sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #FFFFFF;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    transform: translate(-50%, -60%);
+    .logo {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+
+.login-container:after {
+  background-image: linear-gradient(180deg, #78CDD1 0%, #50B7C1 100%);
+  content: '';
+  width: 160%;
+  height: 40vh;
+  position: absolute;
+  left: -30%;
+  top:0;
+  z-index: -1;
+  border-radius: 0 0 50% 50%;
+}
