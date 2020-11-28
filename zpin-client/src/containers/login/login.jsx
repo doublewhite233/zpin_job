@@ -20,7 +20,7 @@ class Login extends Component {
     username: '',
     password: '',
     passwordCon: '',
-    usertype: 'seeker'
+    usertype: [ 'seeker' ]
   }
 
   handleLogin = () => {
@@ -32,9 +32,6 @@ class Login extends Component {
   }
 
   handleChange = (name, val) => {
-    if (typeof (val) === 'object') {
-      val = val[0];
-    }
     this.setState({
       [name]: val
     });
@@ -45,7 +42,7 @@ class Login extends Component {
       username: '',
       password: '',
       passwordCon: '',
-      usertype: 'seeker'
+      usertype: [ 'seeker' ]
     });
   }
 
@@ -58,9 +55,9 @@ class Login extends Component {
           <Tabs onTabClick={() => {this.handleClear();}} tabBarTextStyle={{ fontSize:'17px' }} tabs={tabs}>
             <WingBlank>
               <WhiteSpace />
-              <InputItem onChange={val => {this.handleChange('username', val);}} placeholder='请输入用户名'>用户名：</InputItem>
+              <InputItem onChange={val => {this.handleChange('username', val);}} placeholder='请输入用户名' value={this.state.username}>用户名：</InputItem>
               <WhiteSpace />
-              <InputItem onChange={val => {this.handleChange('password', val);}} placeholder='请输入密码' type='password'>密码：</InputItem>
+              <InputItem onChange={val => {this.handleChange('password', val);}} placeholder='请输入密码' type='password' value={this.state.password}>密码：</InputItem>
               <WhiteSpace />
               <Button onClick={this.handleLogin} type='primary'>登录</Button>
               <WhiteSpace />
@@ -68,11 +65,11 @@ class Login extends Component {
 
             <WingBlank>
               <WhiteSpace />
-              <InputItem onChange={val => {this.handleChange('username', val);}} placeholder='请输入用户名'>用户名：</InputItem>
+              <InputItem onChange={val => {this.handleChange('username', val);}} placeholder='请输入用户名' value={this.state.username}>用户名：</InputItem>
               <WhiteSpace />
-              <InputItem onChange={val => {this.handleChange('password', val);}} placeholder='请输入密码' type='password'>密码：</InputItem>
+              <InputItem onChange={val => {this.handleChange('password', val);}} placeholder='请输入密码' type='password' value={this.state.password}>密码：</InputItem>
               <WhiteSpace />
-              <InputItem onChange={val => {this.handleChange('passwordCon', val);}} placeholder='请确认密码' type='password'>确认密码：</InputItem>
+              <InputItem onChange={val => {this.handleChange('passwordCon', val);}} placeholder='请确认密码' type='password' value={this.state.passwordCon}>确认密码：</InputItem>
               <WhiteSpace />
               <Picker
                   cols={1}
@@ -80,7 +77,7 @@ class Login extends Component {
                   extra="请选择"
                   onOk={val => {this.handleChange('usertype', val);}}
                   title="用户类型"
-                  {...getFieldProps('seeker',{ initialValue: [ 'seeker' ] })}
+                  {...getFieldProps(this.state.usertype,{ initialValue: this.state.usertype })}
               >
                 <List.Item arrow="horizontal">用户类型：</List.Item>
               </Picker>
