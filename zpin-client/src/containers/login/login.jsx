@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { WingBlank, WhiteSpace, InputItem, Button, Tabs, Picker, List } from 'antd-mobile';
 import { createForm } from 'rc-form';
+import { connect } from 'react-redux';
 
 import LoginContainer from '../../components/loginContainer/loginContainer.jsx';
+// import { register, login } from '../../redux/actions';
 
 import './login.less';
 
@@ -93,4 +95,4 @@ class Login extends Component {
 }
 
 const TestWrapper = createForm()(Login);
-export default TestWrapper;
+export default connect()(TestWrapper);

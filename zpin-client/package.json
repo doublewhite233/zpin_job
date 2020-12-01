@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.1.1",
     "@testing-library/user-event": "^12.2.0",
     "antd-mobile": "^2.3.4",
+    "axios": "^0.21.0",
     "fastclick": "^1.0.6",
     "rc-form": "^2.4.11",
     "react": "^17.0.1",

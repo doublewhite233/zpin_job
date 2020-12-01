@@ -31,4 +31,31 @@ function testSave() {
   })
 }
 
-testSave()
+// testSave()
+
+function testFind() {
+  UserModel.find(function (error, users) {
+    console.log('find()', error, users)
+  })
+  UserModel.findOne({username: 'doublewhite'}, function (error, user) {
+    console.log('findone()', error, user)
+  })
+}
+
+// testFind()
+
+function testUpdate() {
+  UserModel.findByIdAndUpdate({_id: '5fc31a4d18557c3a88c058e6'}, {type: 'seeker'}, function (error, doc) {
+    console.log('findByAndUpdate()', error, doc)
+  })
+}
+
+// testUpdate()
+
+function testDelete() {
+  UserModel.remove({_id: '5fc31a4d18557c3a88c058e6'},function(error, doc) {
+    console.log('remove()', error, doc)
+  })
+}
+
+// testDelete()
