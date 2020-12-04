@@ -1,5 +1,5 @@
-
 module.exports = {
+  root: true,
   env: {
     es6: true,
     node: true,
@@ -22,22 +22,24 @@ module.exports = {
   },
   plugins: [ 'react' ],
   rules: {
-    'quotes': [ 2, 'single' ],
-    'linebreak-style': [ 'error', 'unix' ],
-    'no-unused-vars': 2,
+    'quotes': [ 1, 'single' ],
+    'linebreak-style': [ 0, 'windows' ],
+    'comma-style': [2, 'last'],
+    'no-unused-vars': 1,
     'no-trailing-spaces': 1,
-    semi: [ 'error', 'always' ],
+    'block-spacing': [ 1, 'always' ],
+    'semi': [ 2, 'always' ],
     'react/jsx-uses-react': 2,
     'react/jsx-uses-vars': 2,
     'no-undef': 2,
     'no-use-before-define': 2,
     'react/jsx-indent-props': [ 2, 4 ],
     'react/jsx-no-duplicate-props': 2,
-    'react/jsx-sort-props': 2,
+    'react/jsx-sort-props': 1,
     'react/no-direct-mutation-state': 2,
     'arrow-parens': 0,
-    'array-bracket-spacing': [ 'error', 'always' ],
-    'object-curly-spacing': [ 'error', 'always' ],
+    'array-bracket-spacing': [ 1, 'always' ],
+    'object-curly-spacing': [ 2, 'always' ],
     'space-before-function-paren': 1
   },
   settings: {
