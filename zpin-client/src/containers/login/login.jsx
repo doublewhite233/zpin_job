@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { WingBlank, WhiteSpace, InputItem, Button, Tabs, Picker, List } from 'antd-mobile';
+import { WingBlank, WhiteSpace, InputItem, Button, Tabs, Picker, List, Toast } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
-import LoginContainer from '../../components/loginContainer/loginContainer.jsx';
-// import { register, login } from '../../redux/actions';
+import LoginContainer from '../../components/loginContainer/login-container.jsx';
+import { register, login } from '../../redux/actions';
 
 import './login.less';
 
@@ -26,11 +27,23 @@ class Login extends Component {
   }
 
   handleLogin = () => {
-    console.log(this.state);
+    new Promise((resolve) => {
+      resolve(this.props.login(this.state));
+    }).then(() => {
+      if (this.props.user.msg) {
+        Toast.fail(this.props.user.msg, 1);
+      }
+    });
   }
 
   handleRegister = () => {
-    console.log(this.state);
+    new Promise((resolve) => {
+      resolve(this.props.register(this.state));
+    }).then(() => {
+      if (this.props.user.msg) {
+        Toast.fail(this.props.user.msg, 1);
+      }
+    });
   }
 
   handleChange = (name, val) => {
@@ -50,16 +63,21 @@ class Login extends Component {
 
   render () {
     const { getFieldProps } = this.props.form;
+    const { redirectTo } = this.props.user;
+    // have value, redirect
+    if (redirectTo) {
+      return <Redirect to={redirectTo} />;
+    }
     return (
       <div>
         <LoginContainer />
         <div className='login'>
-          <Tabs onTabClick={() => {this.handleClear();}} tabBarTextStyle={{ fontSize:'17px' }} tabs={tabs}>
+          <Tabs onTabClick={() => { this.handleClear(); }} tabBarTextStyle={{ fontSize:'17px' }} tabs={tabs}>
             <WingBlank>
               <WhiteSpace />
-              <InputItem onChange={val => {this.handleChange('username', val);}} placeholder='请输入用户名' value={this.state.username}>用户名：</InputItem>
+              <InputItem onChange={val => { this.handleChange('username', val); }} placeholder='请输入用户名' value={this.state.username}>用户名：</InputItem>
               <WhiteSpace />
-              <InputItem onChange={val => {this.handleChange('password', val);}} placeholder='请输入密码' type='password' value={this.state.password}>密码：</InputItem>
+              <InputItem onChange={val => { this.handleChange('password', val); }} placeholder='请输入密码' type='password' value={this.state.password}>密码：</InputItem>
               <WhiteSpace />
               <Button onClick={this.handleLogin} type='primary'>登录</Button>
               <WhiteSpace />
@@ -67,17 +85,17 @@ class Login extends Component {
 
             <WingBlank>
               <WhiteSpace />
-              <InputItem onChange={val => {this.handleChange('username', val);}} placeholder='请输入用户名' value={this.state.username}>用户名：</InputItem>
+              <InputItem onChange={val => { this.handleChange('username', val); }} placeholder='请输入用户名' value={this.state.username}>用户名：</InputItem>
               <WhiteSpace />
-              <InputItem onChange={val => {this.handleChange('password', val);}} placeholder='请输入密码' type='password' value={this.state.password}>密码：</InputItem>
+              <InputItem onChange={val => { this.handleChange('password', val); }} placeholder='请输入密码' type='password' value={this.state.password}>密码：</InputItem>
               <WhiteSpace />
-              <InputItem onChange={val => {this.handleChange('passwordCon', val);}} placeholder='请确认密码' type='password' value={this.state.passwordCon}>确认密码：</InputItem>
+              <InputItem onChange={val => { this.handleChange('passwordCon', val); }} placeholder='请确认密码' type='password' value={this.state.passwordCon}>确认密码：</InputItem>
               <WhiteSpace />
               <Picker
                   cols={1}
                   data={types}
                   extra="请选择"
-                  onOk={val => {this.handleChange('usertype', val);}}
+                  onOk={val => { this.handleChange('usertype', val); }}
                   title="用户类型"
                   {...getFieldProps(this.state.usertype,{ initialValue: this.state.usertype })}
               >
@@ -95,4 +113,7 @@ class Login extends Component {
 }
 
 const TestWrapper = createForm()(Login);
-export default connect()(TestWrapper);
+export default connect(
+  state => ({ user: state.user }),
+  { register, login }
+)(TestWrapper);

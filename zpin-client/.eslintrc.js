@@ -24,7 +24,7 @@ module.exports = {
   rules: {
     'quotes': [ 1, 'single' ],
     'linebreak-style': [ 0, 'windows' ],
-    'comma-style': [2, 'last'],
+    'comma-style': [ 2, 'last' ],
     'no-unused-vars': 1,
     'no-trailing-spaces': 1,
     'block-spacing': [ 1, 'always' ],

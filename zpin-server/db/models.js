@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
-mongoose.connect('mongodb://localhost:27017/zpin_job')
+mongoose.set('useCreateIndex', true)
+mongoose.connect('mongodb://localhost:27017/zpin_job', { useNewUrlParser: true, useUnifiedTopology: true })
 const conn = mongoose.connection
 conn.on('connected', () => {
   console.log('db connect success')

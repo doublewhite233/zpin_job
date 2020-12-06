@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './loginContainer.less';
+import './login-container.less';
 
 import logo from '../../assets/images/logo.png';
 export default function LoginContainer () {
