@@ -1,9 +1,11 @@
 import React,{ Component } from 'react';
 import { connect } from 'react-redux';
-import { List, InputItem, TextareaItem, Button, WhiteSpace } from 'antd-mobile';
+import { List, InputItem, TextareaItem, Button, WhiteSpace, Toast } from 'antd-mobile';
 
 import TopBar from '../../components/topBar/top-bar';
 import AvatarSelector from '../../components/avatarSelector/avatar-selector';
+
+import { updateUser } from '../../redux/actions';
 
 class UserInfo extends Component {
 
@@ -28,7 +30,16 @@ class UserInfo extends Component {
   }
 
   handleSave = () => {
-    console.log(this.state);
+    if (this.state.post === '') {
+      Toast.fail('职位不能为空', 1);
+    } else if (this.state.salary === '') {
+      Toast.fail('薪资不能为空', 1);
+    } else if (this.props.user === 'boss' && this.state.company === '') {
+      Toast.fail('公司名称不能为空', 1);
+    } else if (this.state.info === '') {
+      this.setState({ info: '暂无' });
+    }
+    this.props.updateUser(this.state);
   }
 
   render () {
@@ -85,5 +96,5 @@ class UserInfo extends Component {
 
 export default connect(
   state => ({ user: state.user }),
-  {}
+  { updateUser }
 )(UserInfo);
